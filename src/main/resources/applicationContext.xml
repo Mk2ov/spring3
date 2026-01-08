@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <bean id="myProcessor" class="com.example.Processor">
+        <constructor-arg value="${cpu.model}"/>
+        <constructor-arg value="${cpu.frequency}"/>
+    </bean>
+
+    <bean id="myComputer" class="com.example.Computer">
+        <constructor-arg value="${pc.case}"/>     <constructor-arg ref="myProcessor"/>      </bean>
+
+    <bean id="myWorkplace" class="com.example.Workplace">
+        <property name="ownerName" value="${workplace.owner}"/>
+        <property name="computer" ref="myComputer"/> </bean>
+
+</beans>
